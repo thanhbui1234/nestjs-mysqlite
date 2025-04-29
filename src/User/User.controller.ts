@@ -7,14 +7,16 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { User } from './User.entity';
 import { UserService } from './User.service';
-
+@ApiTags('users') // Phải khớp tag ở DocumentBuilder
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
+  @ApiOperation({ summary: 'Get all users' })
   async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
